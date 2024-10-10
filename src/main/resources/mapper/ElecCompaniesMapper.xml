@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hitelligence.elec_mgr.mapper.ElecCompaniesMapper">
+    <select id="getAllElecCompanies" resultType="com.hitelligence.elec_mgr.model.ElecCompanies">
+        SELECT company_id AS companyId,
+               company_no AS companyNo,
+               company_name AS companyName,
+               lng,
+               lat
+        FROM jb_company
+    </select>
+
+
+    <insert id="insertElecCompany" parameterType="com.hitelligence.elec_mgr.model.ElecCompanies">
+        INSERT INTO jb_company (company_id, company_no, company_name, lng, lat)
+        VALUES (#{companyId}, #{companyNo}, #{companyName}, #{lng}, #{lat});
+    </insert>
+
+    <select id="selectElecCompanyById" parameterType="long" resultType="com.hitelligence.elec_mgr.model.ElecCompanies">
+        SELECT
+            company_id AS companyId,
+            company_no AS companyNo,
+            company_name AS companyName,
+            lng,
+            lat
+        FROM jb_company
+        WHERE company_id = #{companyId};
+    </select>
+
+    <update id="updateElecCompany" parameterType="com.hitelligence.elec_mgr.model.ElecCompanies">
+        UPDATE jb_company
+        SET company_no = #{companyNo},
+            company_name = #{companyName},
+            lng = #{lng},
+            lat = #{lat}
+        WHERE company_id = #{companyId};
+    </update>
+
+
+    <delete id="deleteElecCompany" parameterType="long">
+        DELETE FROM jb_company WHERE company_id = #{companyId};
+    </delete>
+
+</mapper>
+
+
