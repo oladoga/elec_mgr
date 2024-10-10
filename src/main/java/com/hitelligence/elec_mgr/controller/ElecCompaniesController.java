@@ -47,7 +47,6 @@ public class ElecCompaniesController {
         elecCompaniesService.createElecCompany(company);
         return "电力公司信息新增成功！";
     }
-
     @GetMapping("/elec_companies/{companyId}")
     public ElecCompanies getElecCompany(@PathVariable Long companyId) {
         return elecCompaniesService.getElecCompanyById(companyId);
@@ -63,4 +62,6 @@ public class ElecCompaniesController {
         elecCompaniesService.deleteElecCompany(companyId);
         return "电力公司信息删除成功";
     }
+
+
 }
