@@ -1,5 +1,6 @@
 package com.hitelligence.elec_mgr.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hitelligence.elec_mgr.mapper.ElecCompaniesMapper;
 import com.hitelligence.elec_mgr.model.ElecCompanies;
 import org.apache.poi.ss.usermodel.Row;
@@ -50,13 +51,15 @@ public class ExcelImportService {
                     company.setLat(lat);
 
                     if (overwrite) {
-                        ElecCompanies existingCompany = elecCompaniesMapper.selectElecCompanyById(companyId);
+                        QueryWrapper<ElecCompanies> queryWrapper = new QueryWrapper<>();
+                        queryWrapper.eq("company_id", companyId);
+                        ElecCompanies existingCompany = elecCompaniesMapper.selectOne(queryWrapper);
                         if (existingCompany != null) {
-                            elecCompaniesMapper.deleteElecCompany(companyId);  // 删除原有数据
+                            elecCompaniesMapper.deleteById(companyId);  // 删除原有数据
                         }
                     }
 
-                    elecCompaniesMapper.insertElecCompany(company);  // 插入新数据
+                    elecCompaniesMapper.insert(company);  // 插入新数据
                 } catch (Exception e) {
                     // 如果有异常，将失败的数据添加到失败列表中
                     failedCompanies.add(new ElecCompanies(

@@ -3,13 +3,15 @@ package com.hitelligence.elec_mgr.controller;
 import com.hitelligence.elec_mgr.service.ExcelExportService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class ExcelExportController {
-
+    private static final Logger logger = LoggerFactory.getLogger(ExcelExportController.class);
     private final ExcelExportService excelExportService;
 
     public ExcelExportController(ExcelExportService excelExportService) {
@@ -29,7 +31,7 @@ public class ExcelExportController {
             org.apache.commons.io.IOUtils.copy(excelStream, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error occurred during download of elec companies", e);
         }
     }
 }

@@ -1,8 +1,7 @@
 package com.hitelligence.elec_mgr.service;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hitelligence.elec_mgr.model.ElecCompanies;
-import com.hitelligence.elec_mgr.service.ElecCompaniesService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
@@ -22,9 +21,9 @@ public class ExcelExportService {
     }
 
     public InputStream exportElecCompaniesToExcel() throws Exception {
-        // 调用 getAllElecCompanies 方法并获取分页数据的 List
-        PageInfo<ElecCompanies> pageInfo = elecCompaniesService.getAllElecCompanies(1, Integer.MAX_VALUE);
-        List<ElecCompanies> elecCompanies = pageInfo.getList();
+        // 调用 getPagedElecCompanies 方法并获取所有数据
+        Page<ElecCompanies> page = elecCompaniesService.getPagedElecCompanies(1, Integer.MAX_VALUE);
+        List<ElecCompanies> elecCompanies = page.getRecords();
 
         // 创建工作簿和工作表
         Workbook workbook = new XSSFWorkbook();

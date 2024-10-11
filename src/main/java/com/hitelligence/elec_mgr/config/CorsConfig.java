@@ -14,10 +14,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // 允许前端的来源地址
+                        .allowedOrigins("*") // 允许前端的来源地址
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 允许的HTTP方法
                         .allowedHeaders("*") // 允许的请求头
-                        .allowCredentials(true); // 允许发送凭证
+                        .allowCredentials(false); // 允许发送凭证
             }
         };
     }

@@ -13,7 +13,6 @@
         FROM jb_company
     </select>
 
-
     <insert id="insertElecCompany" parameterType="com.hitelligence.elec_mgr.model.ElecCompanies">
         INSERT INTO jb_company (company_id, company_no, company_name, lng, lat)
         VALUES (#{companyId}, #{companyNo}, #{companyName}, #{lng}, #{lat});
@@ -38,7 +37,6 @@
             lat = #{lat}
         WHERE company_id = #{companyId};
     </update>
-
 
     <delete id="deleteElecCompany" parameterType="long">
         DELETE FROM jb_company WHERE company_id = #{companyId};

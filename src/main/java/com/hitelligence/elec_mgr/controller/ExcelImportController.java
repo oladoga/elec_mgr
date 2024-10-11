@@ -1,4 +1,5 @@
 package com.hitelligence.elec_mgr.controller;
+
 import com.hitelligence.elec_mgr.model.ElecCompanies;
 import com.hitelligence.elec_mgr.service.ExcelImportService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import java.util.Map;
 
 @RestController
 public class ExcelImportController {
-
     private final ExcelImportService excelImportService;
 
     public ExcelImportController(ExcelImportService excelImportService) {
@@ -36,8 +36,8 @@ public class ExcelImportController {
             }
             return response;
         } catch (Exception e) {
-            response.put("msg", "数据导入失败: " + e.getMessage());
-            response.put("failed_companies", null);
+            response.put("msg", "数据导入异常: " + e.getMessage());
+            response.put("failed_companies", new int[0]);
             return response;
         }
     }
